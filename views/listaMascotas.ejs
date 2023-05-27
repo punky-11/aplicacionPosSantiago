@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>mascotas registradas</title>
+</head>
+
+<body>
+
+    
+
+
+
+
+  <a href="/api/v1/mascota" class="btn btn-dark" role="button">registrar nueva mascota</a>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">id Mascota</th>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">RAZA</th>
+        <th scope="col">EDAD</th>
+        <th scope="col">actualizar</th>
+        <th scope="col">borrar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% mascota.forEach(function(elemento) { %>
+        <tr>
+          <td>
+            <%= elemento._id %>
+          </td>
+          <td>
+            <%= elemento.nombre %>
+          </td>
+          <td>
+            <%= elemento.raza %>
+          </td>
+          <td>
+            <%= elemento.edad %>
+          </td>
+          <td>
+            <button data-bs-toggle="modal" data-bs-target="#myModal" onclick="actualizarD('<%= elemento.nombre %>','<%= elemento.raza %>','<%= elemento.edad %>','<%= elemento._id %>')" class="btn btn-dark" >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-vector-pen" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.646.646a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1 0 .708l-1.902 1.902-.829 3.313a1.5 1.5 0 0 1-1.024 1.073L1.254 14.746 4.358 4.4A1.5 1.5 0 0 1 5.43 3.377l3.313-.828L10.646.646zm-1.8 2.908-3.173.793a.5.5 0 0 0-.358.342l-2.57 8.565 8.567-2.57a.5.5 0 0 0 .34-.357l.794-3.174-3.6-3.6z"/>
+                <path fill-rule="evenodd" d="M2.832 13.228 8 9a1 1 0 1 0-1-1l-4.228 5.168-.026.086.086-.026z"/>
+              </svg>
+            </button>
+          </td>
+          <td>
+
+
+            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#myModaD" onclick="eli('<%= elemento._id %>')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+              <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+            </svg></button>
+
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  
+  <!-- The Modal update -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">actualizar</h4>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form id="miModalA" method="POST">
+            <div>
+              <label for="id" class="form-label">id</label>
+              <input type="text" class="form-control" id="_id" name="mId" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="mNombre" class="form-label">nombre</label>
+              <input type="text" class="form-control" id="nombreMacota" name="mNombre">
+            </div>
+            <div class="mb-3">
+              <label for="mRaza" class="form-label">raza</label>
+              <input type="text" class="form-control" id="razaMacota" name="mRaza">
+            </div>
+            <div class="mb-3">
+              <label for="mEdad" class="form-label">edad</label>
+              <input type="text" class="form-control" id="edadMacota" name="mEdad">
+            </div>
+            <button type="submit" class="btn btn-dark p-1 mt-5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-vector-pen" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.646.646a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1 0 .708l-1.902 1.902-.829 3.313a1.5 1.5 0 0 1-1.024 1.073L1.254 14.746 4.358 4.4A1.5 1.5 0 0 1 5.43 3.377l3.313-.828L10.646.646zm-1.8 2.908-3.173.793a.5.5 0 0 0-.358.342l-2.57 8.565 8.567-2.57a.5.5 0 0 0 .34-.357l.794-3.174-3.6-3.6z"/>
+                <path fill-rule="evenodd" d="M2.832 13.228 8 9a1 1 0 1 0-1-1l-4.228 5.168-.026.086.086-.026z"/>
+              </svg> actualizar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- The Modal delete -->
+    <div class="modal" id="myModaD">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">eliminar</h4>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form id="elimi" method="POST">
+             
+              <h1>esta seguro</h1>
+
+              <button type="submit" class="btn btn-dark p-1 mt-5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                </svg>
+              eliminar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  <script>
+    function actualizarD(n, e, r, i) {
+      _id.value = i;
+      nombreMacota.value = n;
+      razaMacota.value = e;
+      edadMacota.value = r;
+  
+      var form = document.getElementById('miModalA');
+      form.setAttribute('action', `update/${i}`);
+    }
+
+    function eli(i) {
+
+      var form = document.getElementById('elimi');
+      form.setAttribute('action', `borrar/${i}`);
+
+    }
+  </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
