@@ -15,7 +15,7 @@ const SchemaUsuario = new mongoose.Schema({
     nombre:{
         default:"sin nombre",
         type:String,
-        required:false,
+        required:true,
        
     },   
     apellido:{

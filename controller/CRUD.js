@@ -1,6 +1,8 @@
 
 const express = require('express');
 const usuario=require('../models/usuariosMongo');
+const productos=require('../models/productoMongo');
+
 //perfil
 exports.perfil=(req , res)=>{
   res.render('perfil');
@@ -37,7 +39,7 @@ exports.ingresar1= async(req , res)=>{
         <span aria-hidden="true">&times;</span>
       </button>
     </div>`
-//res.render('ingresar')
+  //res.render('ingresar')
     }
 
   } catch (error) {
@@ -79,6 +81,29 @@ exports.registrarNueva= (req, res)=>{
 
     res.redirect('/api/registrar');
 };
+
+
+//producto
+exports.agregarProdcutos=(req,res)=>{
+
+  res.render('productosn')
+}
+
+exports.registrarProducto=(req,res)=>{
+  const rproductos = new productos ({ 
+  _id:req.body.referencia,
+  nombreProducto:req.body.nompreProcuto,
+  descripcion:req.body.descripcion,
+  precio:req.body.precio,
+  stok:req.body.stock,
+  //img:req.body.
+  habilitado:req.body.activo
+});
+    rproductos.save();
+    console.log(rproductos);
+    res.render('/api/productos');
+}
+
 
 //eliminar
 
