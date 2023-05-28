@@ -117,9 +117,11 @@ exports.registrarProducto=(req,res)=>{
 
 //tablas
 
-exports.tablaA=(req,res)=>{
-  const
-  res.render('tablaAdmin');
+exports.tablaA= async(req,res)=>{
+  const producto =await usuario.find();
+  res.render('tablaAdmin',{
+    "productos": producto
+  });
 }
 
 
