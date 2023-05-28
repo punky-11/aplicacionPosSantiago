@@ -16,12 +16,14 @@ router.post('/registrar1',crudUsuario.registrarNueva);
 //agregarProductos
 router.get('/productos',crudUsuario.agregarProdcutos);
 router.post('/productos1',crudUsuario.registrarProducto);
-
+//agregar vendedor
+router.get('/registrarVendedor',crudUsuario.registrarV)
 //elimina
 //router.post("/borrar/:id", crudUsuario.borrar);
 //update
 //router.post('/update/:id', crudUsuario.Update);
 
-
+//table
+router.get('/tabla',crudUsuario.tablaA)
 
 module.exports=router;

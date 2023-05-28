@@ -1,7 +1,8 @@
 
-const express = require('express');
 const usuario=require('../models/usuariosMongo');
 const productos=require('../models/productoMongo');
+const vendedor=require('../models/vendedorMongo');
+
 
 //perfil
 exports.perfil=(req , res)=>{
@@ -23,9 +24,9 @@ exports.ingresar1= async(req , res)=>{
     const contraseña= req.body.contraseña;
 
   const usuarioingresa =await  usuario.findOne({correo:correo});
-
+console.log(usuarioingresa);
     if(usuarioingresa.contraseña==contraseña){
-      res.status(200).render('perfil')
+      res.status(200).send('perfil');
       //res.render('perfil')
     }else{
 
@@ -58,9 +59,7 @@ exports.registrar=(req , res)=>{
 
 exports.registrarNueva= (req, res)=>{
 
-
-
-    try {
+try {
       const clientes = new usuario ({ 
         _id:req.body.cedula,
         nombre:req.body.nombre,
@@ -82,6 +81,15 @@ exports.registrarNueva= (req, res)=>{
     res.redirect('/api/registrar');
 };
 
+//registrar vendedor
+exports.registrarV=(req,res)=>{
+    
+  res.render('registrarVendedor')
+}
+exports.registrarV1=(req,res)=>{
+
+}
+
 
 //producto
 exports.agregarProdcutos=(req,res)=>{
@@ -90,6 +98,7 @@ exports.agregarProdcutos=(req,res)=>{
 }
 
 exports.registrarProducto=(req,res)=>{
+
   const rproductos1 = new productos ({ 
   _id:req.body.referencia,
   nombreProducto:req.body.nompreProcuto,
@@ -98,10 +107,19 @@ exports.registrarProducto=(req,res)=>{
   stok:req.body.stock,
   //img:req.body.
   habilitado:req.body.activo
+
 });
+
     rproductos1.save();
     console.log(rproductos1);
     res.render('/api/productos');
+}
+
+//tablas
+
+exports.tablaA=(req,res)=>{
+  const
+  res.render('tablaAdmin');
 }
 
 
@@ -133,3 +151,6 @@ exports.registrarProducto=(req,res)=>{
         console.log(n);
         res.redirect("/api/v1/mascotas");
       };*/
+
+
+

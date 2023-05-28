@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index",
-    "boild-tail": "tailwindcss build -i styles/tailwindcss.css -o assets/styles.css"
+    "boild-tail": "tailwindcss build -i static/styles/tailwindcss.css -o static/styles/styles.css"
   },
   "author": "santiago",
   "license": "ISC",

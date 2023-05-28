@@ -17,22 +17,20 @@ dotenv.config();
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'views'));
-app.use(morgan('dev'));
 
-app.use(express.json())
+app.use(morgan('dev'));
+app.use(express.json());
 //es como que esta bien la peticion y hace no se envie basio lo de la base de datos
-app.use(express.urlencoded({extends:false}))
+app.use(express.urlencoded({extended:false}))
 
 //archivos estaticos de tailwind
-app.use('/assets',express.static('assets'))
+app.use('/static',express.static('static'))
 
 //PUERTO
 const PORT= process.env.PORT ;
 
-app.get('/n',(req,res)=>{
-    res.render('yablaAdmin');
-});
-//tuta
+
+//ruta
 const router = require('./router/enrutamiento')
 app.use('/api/',router)
 
