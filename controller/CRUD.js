@@ -90,7 +90,7 @@ exports.agregarProdcutos=(req,res)=>{
 }
 
 exports.registrarProducto=(req,res)=>{
-  const rproductos = new productos ({ 
+  const rproductos1 = new productos ({ 
   _id:req.body.referencia,
   nombreProducto:req.body.nompreProcuto,
   descripcion:req.body.descripcion,
@@ -99,8 +99,8 @@ exports.registrarProducto=(req,res)=>{
   //img:req.body.
   habilitado:req.body.activo
 });
-    rproductos.save();
-    console.log(rproductos);
+    rproductos1.save();
+    console.log(rproductos1);
     res.render('/api/productos');
 }
 

@@ -30,7 +30,7 @@ app.use('/assets',express.static('assets'))
 const PORT= process.env.PORT ;
 
 app.get('/n',(req,res)=>{
-    res.render('inicio');
+    res.render('yablaAdmin');
 });
 //tuta
 const router = require('./router/enrutamiento')
