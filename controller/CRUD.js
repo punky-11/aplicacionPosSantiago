@@ -115,14 +115,7 @@ exports.registrarProducto=(req,res)=>{
     res.render('/api/productos');
 }
 
-//tablas
 
-exports.tablaA= async(req,res)=>{
-  const producto =await usuario.find();
-  res.render('tablaAdmin',{
-    "productos": producto
-  });
-}
 
 
 //eliminar

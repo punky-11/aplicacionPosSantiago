@@ -31,7 +31,7 @@ const PORT= process.env.PORT ;
 
 
 //ruta
-const router = require('./router/enrutamiento')
+const router = require('./router/enrutamiento',)
 app.use('/api/',router)
 
 //puesto
