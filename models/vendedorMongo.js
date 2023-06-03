@@ -6,35 +6,31 @@ const nuevoUuario = require('../config/conectionMongoose')
 const SchemaVendedor = new mongoose.Schema({
     //di
     _id:{
-    type: Number,
-    required:true,
-    unique:true
+        default:"nn",
+        type:String,
+        required:true,
+        unique:true
     },
 
     nombre:{
         default:"sin nombre",
         type:String,
-        required:true,
+        //required:true,
        
     },   
     apellido:{
         type:String,
         default:"nn",
-        required:true,
+        //required:true,
 
     },
 
     contraseña:{
         default:"nn",
         type:String,
-        required:false,
+        //required:false,
     },
-    correo:{
-        default:"nn",
-        type:String,
-        required:true,
-        unique:true
-    }
+
  });
 
 

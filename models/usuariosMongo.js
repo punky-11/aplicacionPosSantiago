@@ -38,14 +38,16 @@ const SchemaUsuario = new mongoose.Schema({
     },
     direccion:{
         default:"nn",
-        type:String,
-        //required:false,
+        type:String
     },
     ciudad:{
         default:"nn",
-        type:String,
-        //required:false,
+        type:String
     },
+    terminos:{
+        type:Boolean,
+        required:true,
+    }
 
 
  });

@@ -4,10 +4,14 @@ const express = require('express');
 const router =express.Router();
 
 //table
-router.get('/tabla',administrador.tablaA)
+router.get('/tabla',administrador.tablaA);
+//agregar vendedor
+router.post('/agregar',administrador.registrarVendedor);
 
 //admin
 router.get('/administrador',administrador.perfilAdmin);
+
+
 
 
 module.exports=router;

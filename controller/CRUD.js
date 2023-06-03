@@ -1,7 +1,7 @@
-
+const {body, validationResult} = require('express-validator')
 const usuario=require('../models/usuariosMongo');
 const productos=require('../models/productoMongo');
-const vendedor=require('../models/vendedorMongo');
+
 
 
 //perfil
@@ -14,11 +14,50 @@ exports.inicio=(req , res)=>{
   res.render('index')
 };
 
+
+
 //inicio de sesion
 exports.ingresar=(req , res)=>{
   res.render('ingresar')
 }
-exports.ingresar1= async(req , res)=>{
+exports.ingresar1=[
+  body('correo').isEmail()
+  .withMessage('correo invalido'),
+  body('contraseña')
+  .isLength({min:5})
+  .withMessage('contraseña invalida'),
+
+  (req , res)=>{
+
+    const correo=req.body.correo;
+    const contraseña= req.body.contraseña;
+
+    const usuarioingresa = usuario.findOne({correo:correo});
+  console.log(usuarioingresa);
+      if(usuarioingresa.contraseña==contraseña){
+        res.status(200).send('perfil');
+        //res.render('perfil')
+    }
+
+
+ /*const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        console.log(req.body)
+        const valores = req.body
+        const validaciones = errors.array()
+        res.render('ingresar', {validaciones:validaciones, valores: valores})
+    }*/
+
+      
+
+  }
+
+ 
+  
+] 
+
+/*exports.ingresar1= async(req , res)=>{
   try {
    const correo=req.body.correo;
     const contraseña= req.body.contraseña;
@@ -47,7 +86,8 @@ console.log(usuarioingresa);
     
   }
 
-}
+}*/
+
 
 //registrar cliente
 
@@ -56,30 +96,31 @@ exports.registrar=(req , res)=>{
     res.render('registrar')};
 
 
-
-exports.registrarNueva= (req, res)=>{
+    exports.registrar1 = (req, res) => {
 
 try {
-      const clientes = new usuario ({ 
-        _id:req.body.cedula,
-        nombre:req.body.nombre,
-        apellido:req.body.apellido,
-        contraseña:req.body.contraseña,
-        correo:req.body.correo,
-        direccion:req.body.direccion,
-        ciudad:req.body.ciudad,
-        });
-        clientes.save();
+  const clientes = new usuario({
+    _id: req.body.cedula,
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    contraseña: req.body.contraseña,
+    correo: req.body.correo,
+    direccion: req.body.direccion,
+    ciudad: req.body.ciudad,
+    terminos: req.body.terminos,
+  });
+  
+  clientes.save();
+  console.log(clientes);
+  res.render('registrar');
+  
+} catch (errors) {
+  console.log(errors);
+  res.render('registrar');
+}
 
-    } catch (n) {
-      
-
-    res.redirect('/api/registrar');
-
-    }
-
-    res.redirect('/api/registrar');
-};
+     
+    };
 
 //registrar vendedor
 exports.registrarV=(req,res)=>{
