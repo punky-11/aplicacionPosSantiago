@@ -1,6 +1,8 @@
 const {body, validationResult} = require('express-validator')
 const usuario=require('../models/usuariosMongo');
 const productos=require('../models/productoMongo');
+const catalogos = require('../models/productoMongo');
+
 
 
 
@@ -20,7 +22,7 @@ exports.inicio=(req , res)=>{
 exports.ingresar=(req , res)=>{
   res.render('ingresar')
 }
-exports.ingresar1=[
+/*exports.ingresar1=[
   body('correo').isEmail()
   .withMessage('correo invalido'),
   body('contraseña')
@@ -32,32 +34,29 @@ exports.ingresar1=[
     const correo=req.body.correo;
     const contraseña= req.body.contraseña;
 
-    const usuarioingresa = usuario.findOne({correo:correo});
-  console.log(usuarioingresa);
-      if(usuarioingresa.contraseña==contraseña){
-        res.status(200).send('perfil');
-        //res.render('perfil')
+  const usuarioingresa =  usuario.findOne({correo:correo});
+console.log(usuarioingresa);
+    if(usuarioingresa.contraseña==contraseña){
+      res.status(200).send('perfil');
+      //res.render('perfil')
     }
 
 
- /*const errors = validationResult(req)
+ const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
         console.log(req.body)
         const valores = req.body
         const validaciones = errors.array()
         res.render('ingresar', {validaciones:validaciones, valores: valores})
-    }*/
+    }
 
       
 
   }
+] */
 
- 
-  
-] 
-
-/*exports.ingresar1= async(req , res)=>{
+exports.ingresar1= async(req , res)=>{
   try {
    const correo=req.body.correo;
     const contraseña= req.body.contraseña;
@@ -69,24 +68,14 @@ console.log(usuarioingresa);
       //res.render('perfil')
     }else{
 
-      var alerta = document.getElementById('alerta');
 
-      alert("error")
-     alerta.innerHTMLL=
-      `<div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>error</strong> contraseña o correo incorrecto
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>`
-  //res.render('ingresar')
     }
 
   } catch (error) {
     
   }
 
-}*/
+}
 
 
 //registrar cliente
@@ -189,4 +178,20 @@ exports.registrarProducto=(req,res)=>{
       };*/
 
 
+      //carro de compras
 
+      exports.carro=async(req , res)=>{
+
+
+    const productos1=await catalogos.find();
+    res.render('carroDeCompras',{
+      "carro": productos1
+    });
+    res.render('carroDeCompras')
+    
+        
+      };
+      exports.agregar=(req,res)=>{
+        const agregar= document.getElementById('campo');
+
+      }

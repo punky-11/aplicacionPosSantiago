@@ -1,5 +1,4 @@
 const crudUsuario = require('../controller/CRUD');
-const administrador = require('../controller/administrador');
 const express = require('express');
 const router =express.Router();
 
@@ -29,5 +28,8 @@ router.get('/registrarVendedor',crudUsuario.registrarV)
 
 //admin
 //router.get('/administrador1',administrador.perfilAdmin);
+
+//carro
+router.get('/micarro',crudUsuario.carro);
 
 module.exports=router;
