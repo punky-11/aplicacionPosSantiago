@@ -11,7 +11,7 @@ router.post('/agregar',administrador.registrarVendedor);
 //admin
 router.get('/administrador',administrador.perfilAdmin);
 
-
+router.get('/descargar',administrador.descargarExcel);
 
 
 module.exports=router;

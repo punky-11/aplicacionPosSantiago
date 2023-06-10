@@ -31,5 +31,5 @@ router.get('/registrarVendedor',crudUsuario.registrarV)
 
 //carro
 router.get('/micarro',crudUsuario.carro);
-
+router.post('/very',crudUsuario.correon);
 module.exports=router;

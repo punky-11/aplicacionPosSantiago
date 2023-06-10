@@ -2,6 +2,8 @@ const {body, validationResult} = require('express-validator')
 const usuario=require('../models/usuariosMongo');
 const productos=require('../models/productoMongo');
 const catalogos = require('../models/productoMongo');
+const nodemailer = require('nodemailer');
+
 
 
 
@@ -191,7 +193,39 @@ exports.registrarProducto=(req,res)=>{
     
         
       };
-      exports.agregar=(req,res)=>{
+      /*exports.agregar=(req,res)=>{
         const agregar= document.getElementById('campo');
 
-      }
+      }*/
+
+
+exports.correon=(req,res)=>{
+
+  const usuario =req.body.usuario
+  const correo =req.body.correo
+  const contenido =req.body.contenido
+console.log();
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'shernandez998@misena.edu.co',
+    pass: 'zxxlaarsgxqfkqvu'
+  }
+});
+
+var mailOptions = {
+  from: 'shernandez998@misena.edu.co',
+  to: correo,
+  subject: usuario,
+  text: contenido
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+}
