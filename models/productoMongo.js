@@ -7,7 +7,7 @@ const SchemaCatalogo = new mongoose.Schema({
     //di
     _id:{
     type: Object,
-    required:true,
+    //required:true,
     
     },
 

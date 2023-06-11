@@ -8,8 +8,8 @@ const SchemaUsuario = new mongoose.Schema({
     //di
     _id:{
     type: Number,
-    required:true,
-    unique:true
+    //required:true,
+   // unique:true
     },
 
     nombre:{

@@ -8,8 +8,8 @@ const SchemaVendedor = new mongoose.Schema({
     _id:{
         default:"nn",
         type:String,
-        required:true,
-        unique:true
+       // required:true,
+       // unique:true
     },
 
     nombre:{
