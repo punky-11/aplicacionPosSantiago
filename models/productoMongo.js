@@ -7,32 +7,32 @@ const SchemaCatalogo = new mongoose.Schema({
     //di
     _id:{
     type: Object,
-    required:true,
+    //required:true,
     
     },
 
     nombreProducto:{
         default:"sin nombre",
         type:String,
-        required:true,
+        //required:true,
        
     },   
     descripcion:{
         type:String,
         default:"nn",
-        required:true,
+        //required:true,
 
     },
 
     precio:{
         default:"nn",
         type:Number,
-        required:false,
+        //required:false,
     },
     stok:{
         default:"nn",
         type:Number,
-        required:true,
+        //required:true,
         
     },
     img:{

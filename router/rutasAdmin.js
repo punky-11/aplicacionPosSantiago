@@ -13,5 +13,7 @@ router.get('/administrador',administrador.perfilAdmin);
 
 router.get('/descargar',administrador.descargarExcel);
 
+//grafica
+router.get('/grafico',administrador.graficaProductos);
 
 module.exports=router;

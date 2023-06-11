@@ -1,4 +1,5 @@
-const productos=require('../models/productoMongo');
+const productosInventario=require('../models/productos');
+
 const vendedor=require('../models/vendedorMongo');
 const xl = require('excel4node');
 const path = require('path')
@@ -116,3 +117,21 @@ exports.descargarExcel = async(req, res) => {
 
     
 }
+
+
+//grafica
+exports.graficaProductos= async(req , res)=>{
+    //const nombre =await productosInventario.find({},{nombre:1,stock:1,_id:0});
+    const nombre =await productosInventario.find({},{nombre:1,_id:0});
+    console.table(nombre);
+    const stock =await productosInventario.find({},{stock:1,_id:0});
+    console.table(stock);
+
+
+    res.render('grafica');
+
+    res.render('grafica',{
+        "invetarios":nombre,
+        "invetarios":stock
+    });
+  };

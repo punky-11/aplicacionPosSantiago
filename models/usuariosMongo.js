@@ -8,27 +8,27 @@ const SchemaUsuario = new mongoose.Schema({
     //di
     _id:{
     type: Number,
-    required:true,
-    unique:true
+    //required:true,
+    //unique:true
     },
 
     nombre:{
         default:"sin nombre",
         type:String,
-        required:true,
+        //required:true,
        
     },   
     apellido:{
         type:String,
-        default:"nn",
-        required:true,
+        //default:"nn",
+        //required:true,
 
     },
 
     contraseña:{
         default:"nn",
         type:String,
-        required:false,
+        //required:false,
     },
     correo:{
         default:"nn",
@@ -46,7 +46,7 @@ const SchemaUsuario = new mongoose.Schema({
     },
     terminos:{
         type:Boolean,
-        required:true,
+        //required:true,
     }
 
 

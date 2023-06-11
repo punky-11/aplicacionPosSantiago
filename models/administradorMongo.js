@@ -7,20 +7,20 @@ const SchemaAdministrador = new mongoose.Schema({
     //di
     _id:{
     type: Object,
-    required:true,
+    //required:true,
     
     },
 
     nombreProducto:{
         default:"sin nombre",
         type:String,
-        required:true,
+        //required:true,
        
     },   
     descripcion:{
         type:String,
         default:"nn",
-        required:true,
+        //required:true,
 
     },
 
@@ -32,7 +32,7 @@ const SchemaAdministrador = new mongoose.Schema({
     stok:{
         default:"nn",
         type:Number,
-        required:true,
+        //required:true,
         
     },
     img:{

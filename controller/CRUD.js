@@ -1,5 +1,6 @@
 const {body, validationResult} = require('express-validator')
 const usuario=require('../models/usuariosMongo');
+
 const productos=require('../models/productoMongo');
 const catalogos = require('../models/productoMongo');
 const nodemailer = require('nodemailer');
