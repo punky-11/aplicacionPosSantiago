@@ -1,5 +1,4 @@
-const productosInventario=require('../models/productos');
-
+const productos=require('../models/productoMongo');
 const vendedor=require('../models/vendedorMongo');
 const xl = require('excel4node');
 const path = require('path')
@@ -68,7 +67,7 @@ exports.descargarExcel = async(req, res) => {
     });
 
     //definimos el nombre de las columnas
-    ws.cell(1, 1).string('_id').style(columnaEstilo);
+    ws.cell(1, 1).string('correo').style(columnaEstilo);
     ws.cell(1, 2).string('nombre').style(columnaEstilo);
     ws.cell(1, 3).string('apellido').style(columnaEstilo);
     ws.cell(1, 4).string('contraseña').style(columnaEstilo);
@@ -85,7 +84,7 @@ exports.descargarExcel = async(req, res) => {
     ws.cell(fila, 1).string(datoVendedor._id).style(contenidoEstilo);
     ws.cell(fila, 2).string(datoVendedor.nombre).style(contenidoEstilo);
     ws.cell(fila, 3).string(datoVendedor.apellido).style(contenidoEstilo);
-    ws.cell(fila, 4).number(datoVendedor.contraseña).style(contenidoEstilo);
+    ws.cell(fila, 4).string(datoVendedor.contraseña).style(contenidoEstilo);
     
     fila = fila +1;
     });
