@@ -9,7 +9,7 @@ exports.perfilAdmin=(req , res)=>{
 }
 
 //tablas
-
+//descragar un excel
 exports.tablaA= async(req,res)=>{
     const producto =await vendedor.find();
     res.render('tablaAdmin',{

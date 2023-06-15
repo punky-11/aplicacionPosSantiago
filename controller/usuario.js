@@ -25,25 +25,16 @@ exports.inicio=(req , res)=>{
 exports.ingresar=(req , res)=>{
   res.render('ingresar')
 }
-/*exports.ingresar1=[
+
+//validar inicio de sesion
+exports.validacionesn=[
   body('correo').isEmail()
   .withMessage('correo invalido'),
   body('contraseña')
   .isLength({min:5})
   .withMessage('contraseña invalida'),
 
-  (req , res)=>{
-
-    const correo=req.body.correo;
-    const contraseña= req.body.contraseña;
-
-  const usuarioingresa =  usuario.findOne({correo:correo});
-console.log(usuarioingresa);
-    if(usuarioingresa.contraseña==contraseña){
-      res.status(200).send('perfil');
-      //res.render('perfil')
-    }
-
+async (req , res)=>{
 
  const errors = validationResult(req)
 
@@ -55,11 +46,21 @@ console.log(usuarioingresa);
     }
 
       
+    const correo=req.body.correo;
+    const contraseña= req.body.contraseña;
 
+  const usuarioingresa =await  usuario.findOne({correo:correo});
+console.log(usuarioingresa);
+    if(usuarioingresa.contraseña==contraseña){
+     // res.status(200).send('perfil');
+      res.render('perfil')
+    }
   }
-] */
+]
 
-exports.ingresar1= async(req , res)=>{
+//ingresar
+
+/*exports.ingresar1= async(req , res)=>{
   try {
    const correo=req.body.correo;
     const contraseña= req.body.contraseña;
@@ -79,7 +80,7 @@ console.log(usuarioingresa);
   }
 
 }
-
+*/
 
 //registrar cliente
 
@@ -216,8 +217,10 @@ var transporter = nodemailer.createTransport({
 });
 
 var mailOptions = {
-  from: 'shernandez998@misena.edu.co',
-  to: correo,
+  //quien lo envia
+  from: correo,
+  //quien lo recibe
+  to: 'shernandez998@misena.edu.co',
   subject: usuario,
   text: contenido
 };

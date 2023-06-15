@@ -1,4 +1,4 @@
-const crudUsuario = require('../controller/CRUD');
+const crudUsuario = require('../controller/usuario');
 const express = require('express');
 const router =express.Router();
 
@@ -8,7 +8,9 @@ router.get('/',crudUsuario.inicio);
 router.get('/perfil',crudUsuario.perfil);
 //formulario de ingresar
 router.get('/ingresar',crudUsuario.ingresar);
-router.post('/ingresar1',crudUsuario.ingresar1);
+//router.post('/ingresarCliente',crudUsuario.ingresar1);
+//validar inicio de sesion
+router.post('/validar',crudUsuario.validacionesn);
 //abrir el formulario
 router.get('/registrar',crudUsuario.registrar);
 //agregaClientes
@@ -31,5 +33,6 @@ router.get('/registrarVendedor',crudUsuario.registrarV)
 
 //carro
 router.get('/micarro',crudUsuario.carro);
-router.post('/very',crudUsuario.correon);
+//contaco con nosotros
+router.post('/contacto',crudUsuario.correon);
 module.exports=router;
