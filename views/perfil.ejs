@@ -5,8 +5,112 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>perfil</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 </head>
-<body>
-    <h1>hola</h1>
+<body onload="datosUsuario()">
+
+
+            <div class="container">    
+                  <div class="row">
+                      <div class="panel panel-default">
+                      <div class="panel-heading" id="_id" name="_id">  <h4 >cliente Profile <%= _id %>  </h4></div>
+                       <div class="panel-body">
+                      <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                       <img alt="User Pic" src="https://source.unsplash.com/featured/300x201" id="profile-image1" class="img-circle img-responsive"> 
+                     
+                       
+                      
+                      
+                        
+                      </div>
+                      <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8" >
+                          <div class="container" >
+                            <h2 id="nombre" name="nombre"> 
+
+                            </h2>
+                            <p></p>
+                            <!--<h1>Perfil de usuario</h1>-->
+                            <!--<p>Nombre: < usuario.nombre </p>-->
+                            <!--<p>Apellido: <usuario.apellido ></p>-->
+                            <!--<p>Correo: < usuario.correo ></p>-->
+                          
+                          </div>
+                           <hr>
+                          <ul class="container details" >
+                            <li><p name="apellido" id="apellido"><span class="glyphicon glyphicon-user one" style="width:50px;"></span></p></li>
+                            <li><p name="correo" id="correo"><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span></p></li>
+                          </ul>
+                          <hr>
+                          <div class="col-sm-5 col-xs-6 tital " name="" >Date Of Joining: 15 Jun 2016</div>
+                      </div>
+                </div>
+            </div>
+            </div>
+            
+
+                
+                <script>
+/*
+function datosUsuario(){
+
+
+  _id.value = _id;
+  nombre.value = nombre;
+  apellido.value = apellido;
+  correo.value = correo;
+ // direccion.value = direccion;
+  //ciudad.value = ciudad;
+  //id.value = id;
+  var datos = {
+    _id: _id,
+    nombre: nombre,
+    apellido: apellido,
+    correo: correo,
+    //direccion: direccion,
+   // ciudad: ciudad,
+    //id: id
+  }
+  var body = document.getElementById("body");
+  
+  
+
+  
+  return datos;
+  
+
+}
+  */
+
+
+                 /* function datos(){
+                    //console.log(datos());
+                    
+                  }
+console.log(datos());
+function datosUsuario(usuarios){
+  console.log(usuarios);
+  document.getElementById("nombre").innerHTML = usuarios.nombre;
+  document.getElementById("apellido").innerHTML = usuarios.apellido;
+  document.getElementById("correo").innerHTML = usuarios.correo;
+}
+console.log(datosUsuario(usuarios));*/
+
+                   /*function usuario(nombre, apellido, correo) {
+                       this.nombre = nombre;
+                       this.apellido = apellido;
+                       this.correo = correo;
+                   }
+                     var usuario1 = usuario("juna", "apellido", "correo");
+                        console.log(usuario1);
+                        document.getElementById("nombre").innerHTML = usuario1.nombre;
+                        document.getElementById("apellido").innerHTML = usuario1.apellido;
+                        document.getElementById("correo").innerHTML = usuario1.correo;
+*/
+                      
+                </script>
+
 </body>
 </html>

@@ -5,7 +5,7 @@ const router =express.Router();
 //pagina principal
 router.get('/',crudUsuario.inicio);
 //perfil
-router.get('/perfil',crudUsuario.perfil);
+router.get('/perfil/:id',crudUsuario.perfil);
 //formulario de ingresar
 router.get('/ingresar',crudUsuario.ingresar);
 //router.post('/ingresarCliente',crudUsuario.ingresar1);

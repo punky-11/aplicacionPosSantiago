@@ -1,5 +1,6 @@
 const productos=require('../models/productoMongo');
 const vendedor=require('../models/vendedorMongo');
+const productosInventario =require('../models/productos');
 const xl = require('excel4node');
 const path = require('path')
 const fs = require('fs');
@@ -120,17 +121,25 @@ exports.descargarExcel = async(req, res) => {
 
 //grafica
 exports.graficaProductos= async(req , res)=>{
-    //const nombre =await productosInventario.find({},{nombre:1,stock:1,_id:0});
-    const nombre =await productosInventario.find({},{nombre:1,_id:0});
-    console.table(nombre);
-    const stock =await productosInventario.find({},{stock:1,_id:0});
-    console.table(stock);
+   // const nombre =await productosInventario.find({},{nombre:1,stock:1,_id:0});
+    //console.table(nombre)
+    
+    //map() crea una nueva matriz con los resultados de llamar a una función para cada elemento de la matriz
 
+   const nombres = (await productosInventario.find({},{nombre:1,_id:0})).map(item => item.nombre);
+    console.table(nombres);
+   const stocks = (await productosInventario.find({},{stock:1,_id:0})).map(item => item.stock);
+    console.table(stocks);
 
-    res.render('grafica');
+    
 
-    res.render('grafica',{
-        "invetarios":nombre,
-        "invetarios":stock
+    //res.render('grafica');
+
+   res.render('grafica',{
+        "nombres":nombres,
+        "stocks":stocks
     });
+
+
+
   };

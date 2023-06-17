@@ -4,14 +4,62 @@ const usuario=require('../models/usuariosMongo');
 const productos=require('../models/productoMongo');
 const catalogos = require('../models/productoMongo');
 const nodemailer = require('nodemailer');
+const e = require('express');
 
 
 
 
 
 //perfil
-exports.perfil=(req , res)=>{
-  res.render('perfil');
+exports.perfil=  (req , res)=>{
+
+  const id = req.params.id;
+  console.log(id);
+
+
+  /*try {
+    const usuarios =  usuario.findById(id).lean();
+    //const usuarioJson = JSON.parse(JSON.stringify(usuarios));
+    if (usuarios) {
+      //console.log(usuarioJson)
+      console.log(usuarios);
+      res.send('render', {usuario: usuarios } );
+    } else {
+      res.send('error', { message: 'Usuario no encontrado' });
+    }
+  
+  } catch (error) {
+    console.log(error);
+    
+  }
+*/
+
+  //const usuarios =await usuario.findOne({_id:id});
+  //const usuarios = await usuario.find();
+  //const usuario = await usuario;
+//console.log(usuarios);
+//res.render('perfil',{
+ // "usuarios": usuarios})
+//console.log(usuarios[0].nombre);
+ //nombre=usuarios.nombre;
+ //console.log(nombre);
+  /*apellido=usuario.apellido;
+  correo=usuario.correo;
+  direccion=usuario.direccion;
+  ciudad=usuario.ciudad;*/
+
+  //res.render('perfil',{usuario:usuario});
+  /**const clientes = new usuario({
+    _id: req.body.cedula,
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    contraseña: req.body.contraseña,
+    correo: req.body.correo,
+    direccion: req.body.direccion,
+    ciudad: req.body.ciudad,
+    terminos: req.body.terminos, */
+
+  res.render('perfil',{_id:id} );
 };
 
 //pagina principal
@@ -28,8 +76,10 @@ exports.ingresar=(req , res)=>{
 
 //validar inicio de sesion
 exports.validacionesn=[
-  body('correo').isEmail()
-  .withMessage('correo invalido'),
+  body('_id') 
+  .isLength({min:1})
+  .withMessage('_id invalido')
+  ,
   body('contraseña')
   .isLength({min:5})
   .withMessage('contraseña invalida'),
@@ -45,16 +95,19 @@ async (req , res)=>{
         res.render('ingresar', {validaciones:validaciones, valores: valores})
     }
 
-      
-    const correo=req.body.correo;
+     
+    const id=req.body._id;
     const contraseña= req.body.contraseña;
 
-  const usuarioingresa =await  usuario.findOne({correo:correo});
+  const usuarioingresa =await  usuario.findOne({_id:id});
 console.log(usuarioingresa);
-    if(usuarioingresa.contraseña==contraseña){
+    if(usuarioingresa.contraseña==contraseña && usuarioingresa.id==id){
+      console.log(id);
      // res.status(200).send('perfil');
-      res.render('perfil')
+      //res.render('perfil/${_id}' )
+      res.redirect(`perfil/:${id}`)
     }
+    
   }
 ]
 
@@ -200,7 +253,7 @@ exports.registrarProducto=(req,res)=>{
 
       }*/
 
-
+//enviar correo
 exports.correon=(req,res)=>{
 
   const usuario =req.body.usuario

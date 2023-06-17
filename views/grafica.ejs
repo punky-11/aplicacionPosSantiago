@@ -1,33 +1,30 @@
+
+
 <!DOCTYPE html>
 <html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<body onload="imprimirGrafica('nombre','stock')">
+<body onload="imprimirGrafica()">
 
 <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 
+<script>
 
-
-<script> 
-
-function imprimirGrafica() {
-    
-
-var xValues = [nombre];
-var yValues = [stock];
-
-
-
-
-generateData("Math.sin(x)", 0, 10, 0.5);
+/*var inventario =[{nombre:"nombre"},{stock:"stock"}
+  ]*/
+var xValues =  <%- JSON.stringify(nombres) %>;
+var yValues = <%- JSON.stringify(stocks) %>;
+var barColors = ["red", "green","blue","orange","brown"];
+//generateData("Math.sin(x)", 0, 10, 0.5);
+//sgenerateData();
 
 new Chart("myChart", {
-  type: "line",
+  type: "bar",
   data: {
     labels: xValues,
     datasets: [{
       fill: false,
       pointRadius: 2,
-      borderColor: "rgba(0,0,255,0.5)",
+      backgroundColor: barColors,
       data: yValues
     }]
   },    
@@ -40,13 +37,19 @@ new Chart("myChart", {
     }
   }
 });
-function generateData(value, i1, i2, step = 1) {
-  for (let x = i1; x <= i2; x += step) {
-    yValues.push(eval(value));
-    xValues.push(x);
-  }
+
+function imprimirGrafica() {
+  console.table('nombres ', <%- JSON.stringify(nombres) %>);
+  console.table('stocks ', <%- JSON.stringify(stocks) %>);
 }
-});
+
+function generateData() {
+    inventario.forEach(function (item) {
+      xValues.push(item.nombre);
+      yValues.push(item.stock);
+    });
+  }
+
 </script>
 
 </body>
