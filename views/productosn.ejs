@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+
+
+
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -51,6 +55,42 @@
         </div>
         <button type="submit" class="btn btn-primary">registrara producto</button>
       </form>
+
+<!--tabla de los productos-->
+    <h1>datos vendedor</h1>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">referencia</th>
+            <th scope="col">nombre</th>
+            <th scope="col">descripcion</th>
+            <th scope="col">stock</th>
+            <th scope="col">precio</th>
+            <th scope="col">habilitado</th>
+
+        </tr>
+        </thead>
+
+
+
+        <tbody>
+        <% productos.forEach(function(productos) { %>
+
+        <tr>
+            <th scope="row"><%= productos.id%></th>
+            <td><%= productos.referencia%></td>
+            <td><%= productos.nombre%></td>
+            <td><%= productos.descripcion%></td>
+            <td><%= productos.stock%></td>
+            <td><%= productos.precio%></td>
+            <td><%= productos.habilitado%></td>
+
+        </tr>
+
+        <%})%>
+        </tbody>
+    </table>
 
 
 

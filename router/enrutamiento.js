@@ -16,10 +16,9 @@ router.get('/registrar',crudUsuario.registrar);
 //agregaClientes
 router.post('/registrar1',crudUsuario.registrar1);
 //agregarProductos
-router.get('/productos',crudUsuario.agregarProdcutos);
-router.post('/productos1',crudUsuario.registrarProducto);
+
 //agregar vendedor
-router.get('/registrarVendedor',crudUsuario.registrarV)
+router.get('/registrarVendedor',crudUsuario.registrarV);
 //elimina
 //router.post("/borrar/:id", crudUsuario.borrar);
 //update
@@ -30,6 +29,8 @@ router.get('/registrarVendedor',crudUsuario.registrarV)
 
 //admin
 //router.get('/administrador1',administrador.perfilAdmin);
+//ver productos
+router.get('/producto',crudUsuario.productos);
 
 //carro
 router.get('/micarro',crudUsuario.carro);

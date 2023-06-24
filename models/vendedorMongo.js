@@ -5,13 +5,14 @@ const nuevoUuario = require('../config/conectionMongoose')
 
 const SchemaVendedor = new mongoose.Schema({
     //di
-    _id:{
-        default:"nn",
-        type:String,
-        required:true,
-        unique:true
-    },
 
+
+    correo:{
+        default:"sin nombre",
+        type:String,
+        //required:true,
+       
+    },   
     nombre:{
         default:"sin nombre",
         type:String,

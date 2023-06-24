@@ -27,7 +27,7 @@ const SchemaAdministrador = new mongoose.Schema({
     precio:{
         default:"nn",
         type:Number,
-        required:false,
+        //required:false,
     },
     stok:{
         default:"nn",

@@ -1,16 +1,17 @@
-const productos=require('../models/productoMongo');
+//const productos=require('../models/productoMongo');
 const vendedor=require('../models/vendedorMongo');
 const productosInventario =require('../models/productos');
 const xl = require('excel4node');
 const path = require('path')
 const fs = require('fs');
 
+
 exports.perfilAdmin=(req , res)=>{
     res.render('administrador');
 }
 
 //tablas
-//descragar un excel
+
 exports.tablaA= async(req,res)=>{
     const producto =await vendedor.find();
     res.render('tablaAdmin',{
@@ -27,17 +28,74 @@ exports.registrarVendedor=(req,res)=>{
   nombre:req.body.nombre,
   apellido:req.body.apellido,
   contraseña:req.body.contraseña,
-  _id:req.body.correo
+  correo:req.body.correo
 
 });
 
 vendedor1.save();
     console.log(vendedor1);
-    res.render('/api/registrar');
+    res.redirect('/admin/tabla');
+}
+//crud vendedores
+//editar vendedor
+exports.editar= async(req,res)=>{
+    const n = await vendedor.findByIdAndUpdate(
+        id = req.params.id,
+        {
+          correo: req.body.cVendedor,
+          nombre: req.body.nVendedor,
+          apellido: req.body.aVendedor,
+          contraseña: req.body.contraseña
+        }
+      );
+      console.log(req.params)
+      console.log(n);
+      res.redirect("/admin/tabla");
 }
 
+//eliminar venderdor
+
+exports.borrar =  async(req, res) => {
+    
+    await vendedor.findByIdAndDelete(id = req.params.id);
+    
+    res.redirect("/admin/tabla")
+} 
 
 
+//producto
+exports.verProductos= async (req,res)=>{
+    const pro = await productosInventario.find();
+    res.render('productosn',{
+        "productos": pro
+    })
+}
+
+//agregar productos
+exports.registrarProducto=(req,res)=>{
+
+    const agrgarProductos = new productos ({
+        _id:req.body.referencia,
+        nombreProducto:req.body.nompreProcuto,
+        descripcion:req.body.descripcion,
+        precio:req.body.precio,
+        stok:req.body.stock,
+        //img:req.body.
+        habilitado:req.body.activo
+
+    });
+
+    agrgarProductos.save();
+    console.log(agrgarProductos);
+    res.render('/api/productos');
+}
+//crud productos
+
+//agregar productos
+// eliminar productos
+
+
+//descargar excel con los datos de los vendedores
 
 exports.descargarExcel = async(req, res) => {
     //configuramos el excel4node

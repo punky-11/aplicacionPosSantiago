@@ -1,10 +1,12 @@
+'use strict'
 const {body, validationResult} = require('express-validator')
 const usuario=require('../models/usuariosMongo');
 
-const productos=require('../models/productoMongo');
-const catalogos = require('../models/productoMongo');
+//const productos=require('../models/productos');
+const catalogos = require('../models/productos');
 const nodemailer = require('nodemailer');
 const e = require('express');
+//const vendedor = require("../models/vendedorMongo");
 
 
 
@@ -64,14 +66,14 @@ exports.perfil=  (req , res)=>{
 
 //pagina principal
 exports.inicio=(req , res)=>{
-  res.render('index')
+  res.render('index');
 };
 
 
 
 //inicio de sesion
 exports.ingresar=(req , res)=>{
-  res.render('ingresar')
+  res.render('ingresar');
 }
 
 //validar inicio de sesion
@@ -178,29 +180,7 @@ exports.registrarV1=(req,res)=>{
 }
 
 
-//producto
-exports.agregarProdcutos=(req,res)=>{
 
-  res.render('productosn')
-}
-
-exports.registrarProducto=(req,res)=>{
-
-  const rproductos1 = new productos ({ 
-  _id:req.body.referencia,
-  nombreProducto:req.body.nompreProcuto,
-  descripcion:req.body.descripcion,
-  precio:req.body.precio,
-  stok:req.body.stock,
-  //img:req.body.
-  habilitado:req.body.activo
-
-});
-
-    rproductos1.save();
-    console.log(rproductos1);
-    res.render('/api/productos');
-}
 
 
 
@@ -285,4 +265,17 @@ transporter.sendMail(mailOptions, function(error, info){
     console.log('Email sent: ' + info.response);
   }
 });
+}
+
+//ver productos
+exports.productos=async (req,res)=>{
+
+const  productos =await catalogos.find();
+
+    res.render('productos',{
+        "productos":productos
+    });
+
+
+
 }
