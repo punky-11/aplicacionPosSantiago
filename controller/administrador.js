@@ -74,7 +74,7 @@ exports.verProductos= async (req,res)=>{
 //agregar productos
 exports.registrarProducto=(req,res)=>{
 
-    const agrgarProductos = new productos ({
+    const agrgarProductos = new productosInventario ({
         _id:req.body.referencia,
         nombreProducto:req.body.nompreProcuto,
         descripcion:req.body.descripcion,
@@ -91,7 +91,24 @@ exports.registrarProducto=(req,res)=>{
 }
 //crud productos
 
-//agregar productos
+//editar productos
+exports.editarProducto= async(req,res)=>{
+    const n = await productosInventario.findByIdAndUpdate(
+        id = req.params.id,
+        {
+            referencia: req.body.referencia,
+            nombre: req.body.nombre,
+            descripcion: req.body.descripcion,
+            stock: req.body.stock,
+            precio: req.body.precio,
+            habilitado: req.body.habilitado
+
+        }
+    );
+    console.log(req.params)
+    console.log(n);
+    res.redirect("/admin/tabla");
+}
 // eliminar productos
 
 

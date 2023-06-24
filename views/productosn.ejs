@@ -68,6 +68,8 @@
             <th scope="col">stock</th>
             <th scope="col">precio</th>
             <th scope="col">habilitado</th>
+            <th scope="col">actualizar</th>
+            <th scope="col">eliminar</th>
 
         </tr>
         </thead>
@@ -85,6 +87,11 @@
             <td><%= productos.stock%></td>
             <td><%= productos.precio%></td>
             <td><%= productos.habilitado%></td>
+            <td><button data-toggle="modal" data-target="#editar" class="btn btn-dark"
+                        onclick="actualizarVendedor('<%= productos._id %>','<%= productos.referencia%>','<%= productos.nombre %>',
+                                '<%= productos.descripcion %>','<%= productos.stock %>','<%= productos.precio %>'
+                                ,'<%= productos.habilitado %>')" >editar</button></td>
+            <td></td>
 
         </tr>
 
@@ -92,6 +99,85 @@
         </tbody>
     </table>
 
+
+    <!-- modal de editar -->
+    <div class="modal" id="editar">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">actualizar</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="editarVen" method="POST">
+                        <div>
+                            <label for="id" class="form-label">id</label>
+                            <input type="text" class="form-control" id="_id" name="id" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="referencia" class="form-label">referencia</label>
+                            <input type="text" class="form-control" id="referencia" name="referencia">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="stock" class="form-label">stock</label>
+                            <input type="text" class="form-control" id="stock" name="stock">
+                        </div>
+                        <div class="mb-3">
+                            <label for="precio" class="form-label">precio</label>
+                            <input type="number" class="form-control" id="precio" name="precio">
+                        </div>
+                        <div class="mb-3">
+                            <label for="habilitado" class="form-label">habilitado</label>
+                            <input type="checkbox" class="form-check-label" id="habilitado" name="habilitado">
+                        </div>
+                        <button type="submit" class="btn btn-dark p-1 mt-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-vector-pen" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M10.646.646a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1 0 .708l-1.902 1.902-.829 3.313a1.5 1.5 0 0 1-1.024 1.073L1.254 14.746 4.358 4.4A1.5 1.5 0 0 1 5.43 3.377l3.313-.828L10.646.646zm-1.8 2.908-3.173.793a.5.5 0 0 0-.358.342l-2.57 8.565 8.567-2.57a.5.5 0 0 0 .34-.357l.794-3.174-3.6-3.6z"/>
+                                <path fill-rule="evenodd" d="M2.832 13.228 8 9a1 1 0 1 0-1-1l-4.228 5.168-.026.086.086-.026z"/>
+                            </svg> actualizar
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        function actualizarVendedor(id,referencia,nombre,stock,precio,habilitado){
+
+            _id.value = id;
+            referencia.value = referencia;
+            nombre.value = nombre;
+            stock.value=stock;
+            precio.value=precio;
+            habilitado.value=habilitado;
+
+            var form = editarVen;
+            form.setAttribute('action', `/admin/editar/${id}`);
+        }
+
+
+        function eliminarVendedor(id){
+
+            var form = elimiminarV;
+            form.setAttribute('action',`/admin/borrar/${id}`);
+        }
+    </script>
 
 
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

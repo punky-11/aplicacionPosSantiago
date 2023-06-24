@@ -5,24 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b427afd2-2844-43a4-b02e-ef6dfebda576" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/aplicacionPosSantiago.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/administrador.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/administrador.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/usuario.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/usuario.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/administradorMongo.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/administradorMongo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/productos.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/productos.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/usuariosMongo.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/usuariosMongo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/vendedorMongo.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/vendedorMongo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/enrutamiento.js" beforeDir="false" afterPath="$PROJECT_DIR$/router/enrutamiento.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/rutasAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/router/rutasAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/parciales/nav.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/parciales/nav.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/parciales/navAdmin.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/parciales/navAdmin.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/productosn.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/productosn.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/prueba.ejs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/tablaAdmin.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/tablaAdmin.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1687553383731</updated>
       <workItem from="1687553389273" duration="9792000" />
-      <workItem from="1687567302442" duration="6508000" />
+      <workItem from="1687567302442" duration="7880000" />
     </task>
     <servers />
   </component>
