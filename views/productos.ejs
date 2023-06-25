@@ -54,7 +54,7 @@
 
         <h1 class="h1">Productos</h1>
 
-            <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4 p-5">
                 <% productos.forEach(function(productos) { %>
                     <div class="col">
                         <div class="card shadow-sm">
@@ -67,7 +67,7 @@
                                 <p class="card-text"> <strong> <%= productos.precio%> </strong></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button class="btn btn-dark"data-toggle="modal" data-target="#r">agregar al carros</button>
+                                        <button class="btn btn-dark" onclick="agregarCarro('productos.nombre','productos.precio')" >agregar al carros</button>
 
                                     </div>
 

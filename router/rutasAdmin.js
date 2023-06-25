@@ -16,6 +16,8 @@ router.get('/descargar',administrador.descargarExcel);
 //productos
 router.get('/productos',administrador.verProductos);
 router.post('/productos1',administrador.registrarProducto);
+//crud productos
+router.post('/actualizarProducto/:id',administrador.actualizarProducto)
 //grafica
 router.get('/grafico',administrador.graficaProductos);
 

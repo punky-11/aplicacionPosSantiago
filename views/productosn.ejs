@@ -88,9 +88,9 @@
             <td><%= productos.precio%></td>
             <td><%= productos.habilitado%></td>
             <td><button data-toggle="modal" data-target="#editar" class="btn btn-dark"
-                        onclick="actualizarVendedor('<%= productos._id %>','<%= productos.referencia%>','<%= productos.nombre %>',
-                                '<%= productos.descripcion %>','<%= productos.stock %>','<%= productos.precio %>'
-                                ,'<%= productos.habilitado %>')" >editar</button></td>
+                        onclick="actualizarVendedor('<%= productos._id %>','<%= productos.referencia%>',
+                        '<%= productos.nombre %>','<%= productos.descripcion %>','<%= productos.stock %>',
+                        '<%= productos.precio %>','<%= productos.habilitado %>')" >editar</button></td>
             <td></td>
 
         </tr>
@@ -113,30 +113,34 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form id="editarVen" method="POST">
+                    <form id="editarpro" method="POST">
                         <div>
-                            <label for="id" class="form-label">id</label>
+                            
                             <input type="text" class="form-control" id="_id" name="id" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="referencia" class="form-label">referencia</label>
-                            <input type="text" class="form-control" id="referencia" name="referencia">
+                            <input type="text" class="form-control" id="rProductos" name="rProductos">
                         </div>
                         <div class="mb-3">
                             <label for="nombre" class="form-label">nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre">
+                            <input type="text" class="form-control" id="nProductos" name="nProductos">
                         </div>
                         <div class="mb-3">
+                          <label for="nombre" class="form-label">descripcion</label>
+                          <input type="text" class="form-control" id="descripcionP" name="descripcionP">
+                      </div>
+                        <div class="mb-3">
                             <label for="stock" class="form-label">stock</label>
-                            <input type="text" class="form-control" id="stock" name="stock">
+                            <input type="text" class="form-control" id="sProductos" name="sProductos">
                         </div>
                         <div class="mb-3">
                             <label for="precio" class="form-label">precio</label>
-                            <input type="number" class="form-control" id="precio" name="precio">
+                            <input type="number" class="form-control" id="precioP" name="precio">
                         </div>
                         <div class="mb-3">
                             <label for="habilitado" class="form-label">habilitado</label>
-                            <input type="checkbox" class="form-check-label" id="habilitado" name="habilitado">
+                            <input type="checkbox" class="form-check-label" id="habilitadoP" name="habilitadoP">
                         </div>
                         <button type="submit" class="btn btn-dark p-1 mt-5">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-vector-pen" viewBox="0 0 16 16">
@@ -158,17 +162,18 @@
 
 
     <script>
-        function actualizarVendedor(id,referencia,nombre,stock,precio,habilitado){
+        function actualizarVendedor(id,referencia,nombre,descripcion,stock,precio,habilitado){
 
             _id.value = id;
-            referencia.value = referencia;
-            nombre.value = nombre;
-            stock.value=stock;
-            precio.value=precio;
-            habilitado.value=habilitado;
+            rProductos.value = referencia;
+            nProductos.value = nombre;
+            descripcionP.value=descripcion
+            sProductos.value=stock;
+            precioP.value=precio;
+            habilitadoP.value=habilitado;
 
-            var form = editarVen;
-            form.setAttribute('action', `/admin/editar/${id}`);
+            var form = editarpro;
+            form.setAttribute('action', `/admin/actualizarProducto/${id}`);
         }
 
 

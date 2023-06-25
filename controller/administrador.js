@@ -92,22 +92,22 @@ exports.registrarProducto=(req,res)=>{
 //crud productos
 
 //editar productos
-exports.editarProducto= async(req,res)=>{
+exports.actualizarProducto= async(req,res)=>{
     const n = await productosInventario.findByIdAndUpdate(
         id = req.params.id,
         {
-            referencia: req.body.referencia,
-            nombre: req.body.nombre,
-            descripcion: req.body.descripcion,
-            stock: req.body.stock,
-            precio: req.body.precio,
-            habilitado: req.body.habilitado
+            referencia: req.body.rProductos,
+            nombre: req.body.nProductos,
+            descripcion: req.body.descripcionP,
+            stock: req.body.sProductos,
+            precio: req.body.precioP,
+            habilitado: req.body.habilitadoP
 
         }
     );
     console.log(req.params)
-    console.log(n);
-    res.redirect("/admin/tabla");
+    console.log("su id es: "+n);
+    res.redirect('/admin/productos');
 }
 // eliminar productos
 
