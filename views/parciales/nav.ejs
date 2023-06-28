@@ -7,9 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="../static/styles/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-<body>
+<body >
 
 <section>
 
@@ -153,11 +154,12 @@ require('@tailwindcss/aspect-ratio'),
 
             <!-- carro -->
             <div class="ml-4 flow-root lg:ml-6">
-              <a href="#" class="group -m-2 flex items-center p-2" data-bs-toggle="modal" data-bs-target="#carrito">
+              <a href="#" class="group -m-2 flex items-center p-2"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" onclick="pintaCarro()">
                 <svg  class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                  <path data-toggle="modal" data-target="#editar" stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                  <path  stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                 </svg>
-                <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                <!--se va a alcenar el numero-->
+                <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800" id="numeros">0</span>
                 <span class="sr-only">items in cart, view bag</span>
               </a>
             </div>
@@ -169,37 +171,116 @@ require('@tailwindcss/aspect-ratio'),
   </div>
 
 
-  <div class="modal" id="carrito">
-    <div class="modal-dialog">
-      <div class="modal-content">
   
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Productos agregados</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-  
-        <!-- Modal body -->
-        <div class="modal-body">
-          <div id="carro">
 
-          </div>
-        </div>
-  
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Comprar</button>
-        </div>
-  
-      </div>
-    </div>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Mi carrito</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
+  <div class="offcanvas-body">
+    <div id="contenidoCarro" class="contenidoCarro"></div>
+  </div>
+  <div>
+    <div id="precioTotal"></div>
+
+   </div>
+</div>
 
   
 </section>
 
 <script>
-  function agregarCarro(nombre,precio) {
+  var carro = JSON.parse(localStorage.getItem("prodcutoCarro")) || []
+
+
+
+  function agregarCarro(nombre,precio,id) {
+
+    carro.push({
+
+      "id":id,
+      "nombre":nombre,
+      "precio":precio
+
+    });
+
+    localStorage.setItem("prodcutoCarro",JSON.stringify(carro) );
+
+}
+
+  function pintaCarro() {
+    
+  carro.forEach(miCarro=>{
+
+
+const contenidoCarro=document.getElementById('contenidoCarro') ;
+
+
+contenidoCarro.innerHTML +=`
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://source.unsplash.com/featured/300x201" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">${miCarro.nombre}</h5>
+        <p class="card-text">${miCarro.precio}</p>
+        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        <button onclick="eliminarProducto(${miCarro.id})" class="btn btn-danger">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+  `
+
+
+});
+
+precioT()
+    };
+
+
+  //suma productos precio
+  function precioT() {
+    const total = carro.reduce((acumulador, el) => acumulador + parseFloat(el.precio), 0).toFixed(2);
+
+  const precioTotal = document.getElementById('precioTotal');
+  precioTotal.innerHTML = `<p>total: ${total}</p>`;
+  };
+
+
+  //eliminar produsto
+
+  function eliminarProducto(id) {
+  // Filtrar el carro para obtener todos los productos excepto el que tiene el ID especificado
+  carro = carro.filter(miCarro => miCarro.id !== id);
+  localStorage.setItem("prodcutoCarro", JSON.stringify(carro));
+  pintaCarro();
+  precioT();
+}
+
+
+
+    
+      
+
+
+
+  //set item
+  //guardamos en el storange
+
+  //get item
+  //optenemos lo que guardamos en el setItem
+
+  //setItem
+  //se usa json.stringify por que solo se puede mandar strin a el torange
+
+
+//no mirar
+
+  /*function agregarCarro(nombre,precio) {
 
     let miCarro = storage.getItem(miCarro);
 
@@ -215,8 +296,9 @@ field.addEventListener("change", function() {
   // Almacena el resultado en el objeto de almacenamiento de sesión
   sessionStorage.setItem("autosave", field.value);
 });
+}*/
     
-  }
+  
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

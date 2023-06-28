@@ -67,7 +67,7 @@
                                 <p class="card-text"> <strong> <%= productos.precio%> </strong></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button class="btn btn-dark" onclick="agregarCarro('productos.nombre','productos.precio')" >agregar al carros</button>
+                                        <button class="btn btn-dark" onclick="agregarCarro(`<%=productos.nombre%>`,`<%=productos.precio%>`,`<%=productos.id%>`)" >Agregar al carro</button>
 
                                     </div>
 
