@@ -64,10 +64,12 @@ function eliminarProducto(id) {
 // Filtrar el carro para obtener todos los productos excepto el que tiene el ID especificado
 
 carro = carro.filter(miCarro => miCarro.id === id);
+https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
 let carro=carro.splice(carro,1)
 localStorage.setItem("prodcutoCarro", JSON.stringify(carro));
 
-
+https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift
 
 pintaCarro();
 
