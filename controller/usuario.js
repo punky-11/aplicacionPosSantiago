@@ -276,6 +276,4 @@ const  productos =await catalogos.find();
         "productos":productos
     });
 
-
-
 }
