@@ -35,14 +35,16 @@ contenidoCarro.innerHTML +=`
       <h5 class="card-title">${miCarro.nombre}</h5>
       <p class="card-text">${miCarro.precio}</p>
       <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-      <button onclick="eliminarProducto(${miCarro.id})" class="btn btn-danger">Eliminar</button>
+      
     </div>
   </div>
 </div>
 </div>
 `
-
-
+let eliminarP=document.createElement('button');
+  eliminarP.className="bi bi-trash-fill";
+  productoEliminado.appendChild(eliminarP);
+  eliminarP.addEventListener("click",eliminarProducto);
 });
 
 precioT()
@@ -60,22 +62,32 @@ precioTotal.innerHTML = `<p>total: ${total}</p>`;
 
 //eliminar produsto
 
-function eliminarProducto(id) {
+/*function eliminarProducto(id) {
 // Filtrar el carro para obtener todos los productos excepto el que tiene el ID especificado
 
 carro = carro.filter(miCarro => miCarro.id === id);
-https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+//https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
 let carro=carro.splice(carro,1)
 localStorage.setItem("prodcutoCarro", JSON.stringify(carro));
 
-https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift
+//https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift
 
 pintaCarro();
 
 precioT();
-}
+}*/
 
+function eliminar(id){
+
+  carro = carro.filter(miCarro => miCarro.id === id);
+
+  
+  localStorage.setItem("prodcutoCarro", JSON.stringify(carro));
+
+  pintaCarro();
+  precioT();
+}
 
 
   
