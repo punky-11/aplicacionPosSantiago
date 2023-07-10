@@ -1,21 +1,21 @@
 var carro = JSON.parse(localStorage.getItem("prodcutoCarro")) || []
 
-
-
-function agregarCarro(nombre,precio,id) {
+function agregarCarro(nombre,precio,id,stock) {
 
   carro.push({
 
     "id":id,
     "nombre":nombre,
-    "precio":precio
+    "precio":precio,
+    "stock":stock,
 
+    
   });
-
+console.log(carro);
   localStorage.setItem("prodcutoCarro",JSON.stringify(carro) );
 
 }
-
+//pinta el carro
 function pintaCarro() {
   
 carro.forEach(miCarro=>{
@@ -25,7 +25,7 @@ const contenidoCarro=document.getElementById('contenidoCarro') ;
 
 
 contenidoCarro.innerHTML +=`
-<div class="card mb-3" style="max-width: 540px;">
+<div class=" mb-3" >
 <div class="row g-0">
   <div class="col-md-4">
     <img src="https://source.unsplash.com/featured/300x201" class="img-fluid rounded-start" alt="...">
@@ -34,20 +34,22 @@ contenidoCarro.innerHTML +=`
     <div class="card-body">
       <h5 class="card-title">${miCarro.nombre}</h5>
       <p class="card-text">${miCarro.precio}</p>
-      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+      <p class="card-text">cantidad: ${miCarro.stock}</p>
       
     </div>
   </div>
 </div>
 </div>
-`
-let eliminarP=document.createElement('button');
-  eliminarP.className="bi bi-trash-fill";
-  productoEliminado.appendChild(eliminarP);
-  eliminarP.addEventListener("click",eliminarProducto);
+`;
+let eliminarP = document.createElement('button');
+eliminarP.className = "bi bi-trash-fill";
+contenidoCarro.appendChild(eliminarP);
+eliminarP.addEventListener("click",eliminarProducto );
+
 });
 
 precioT()
+
   };
 
 
@@ -60,36 +62,27 @@ precioTotal.innerHTML = `<p>total: ${total}</p>`;
 };
 
 
-//eliminar produsto
+//eliminar producto
 
-/*function eliminarProducto(id) {
-// Filtrar el carro para obtener todos los productos excepto el que tiene el ID especificado
 
-carro = carro.filter(miCarro => miCarro.id === id);
-//https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
-let carro=carro.splice(carro,1)
-localStorage.setItem("prodcutoCarro", JSON.stringify(carro));
+const eliminarProducto = ()=> {
+  const eliminar =carro.find((elementop )=> elementop.id );
+  carro= carro.filter((carroid)=>{
+    return carroid !== eliminar;
+  })
 
-//https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
-//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift
-
-pintaCarro();
-
-precioT();
-}*/
-
-function eliminar(id){
-
-  carro = carro.filter(miCarro => miCarro.id === id);
-
-  
   localStorage.setItem("prodcutoCarro", JSON.stringify(carro));
-
-  pintaCarro();
-  precioT();
+  
+  actualizar();
 }
 
 
+//actualizar pagina 
+function actualizar() {
+  location.reload();
+  return false;
+
+}
   
     
 
