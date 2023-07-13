@@ -1,19 +1,35 @@
 var carro = JSON.parse(localStorage.getItem("prodcutoCarro")) || []
 
-function agregarCarro(nombre,precio,id,stock) {
 
+
+function agregarCarro(nombre,precio,id) {
+
+const repe= carro.some((repepro)=> repepro.id === id);
+
+if(repe){
+  carro.map((pordu)=>{
+    if(pordu.id === id){
+      pordu.cantidad++;
+
+      localStorage.setItem("prodcutoCarro", JSON.stringify(carro));
+      precioT()
+    } 
+  })
+}else{
   carro.push({
 
     "id":id,
     "nombre":nombre,
     "precio":precio,
-    "stock":stock,
+    "cantidad":1,
 
     
   });
-console.log(carro);
+  
   localStorage.setItem("prodcutoCarro",JSON.stringify(carro) );
 
+}
+contadorCarro()
 }
 //pinta el carro
 function pintaCarro() {
@@ -33,15 +49,16 @@ contenidoCarro.innerHTML +=`
   <div class="col-md-8">
     <div class="card-body">
       <h5 class="card-title">${miCarro.nombre}</h5>
-      <p class="card-text">${miCarro.precio}</p>
-      <p class="card-text">cantidad: ${miCarro.stock}</p>
-      
+      <p class="card-text">${miCarro.precio * miCarro.cantidad}</p>
+      <p class="card-text">cantidad: ${miCarro.cantidad }</p>
+      <button class="btn btn-danger" oncki>Eliminar</button>
     </div>
   </div>
 </div>
 </div>
 `;
 let eliminarP = document.createElement('button');
+console.log(carro.length);
 eliminarP.className = "bi bi-trash-fill";
 contenidoCarro.appendChild(eliminarP);
 eliminarP.addEventListener("click",eliminarProducto );
@@ -53,9 +70,19 @@ precioT()
   };
 
 
+
+function contadorCarro() {
+  const cantidad = document.getElementById('cantidad');
+  
+  cantidad.style.display="block"
+  cantidad.innerText=carro.length;
+
+}
+
+
 //suma productos precio
 function precioT() {
-  const total = carro.reduce((acumulador, el) => acumulador + parseFloat(el.precio), 0).toFixed(2);
+  const total = carro.reduce((acumulador, el) => acumulador + parseFloat(el.precio * el.cantidad), 0).toFixed(2);
 
 const precioTotal = document.getElementById('precioTotal');
 precioTotal.innerHTML = `<p>total: ${total}</p>`;
@@ -73,7 +100,7 @@ const eliminarProducto = ()=> {
 
   localStorage.setItem("prodcutoCarro", JSON.stringify(carro));
   
-  actualizar();
+  //actualizar();
 }
 
 
@@ -84,36 +111,3 @@ function actualizar() {
 
 }
   
-    
-
-
-
-//set item
-//guardamos en el storange
-
-//get item
-//optenemos lo que guardamos en el setItem
-
-//setItem
-//se usa json.stringify por que solo se puede mandar strin a el torange
-
-
-//no mirar
-
-/*function agregarCarro(nombre,precio) {
-
-  let miCarro = storage.getItem(miCarro);
-
-// Verificamos si tenemos algún valor auto guardado
-// (esto solo ocurrirá si la página es recargada accidentalmente)
-if (sessionStorage.getItem("autosave")) {
-// Restaura el contenido al campo de texto
-field.value = sessionStorage.getItem("autosave");
-}
-
-// Espera por cambios en el campo de texto
-field.addEventListener("change", function() {
-// Almacena el resultado en el objeto de almacenamiento de sesión
-sessionStorage.setItem("autosave", field.value);
-});
-}*/

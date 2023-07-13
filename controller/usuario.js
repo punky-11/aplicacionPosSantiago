@@ -1,11 +1,11 @@
 'use strict'
 const {body, validationResult} = require('express-validator')
 const usuario=require('../models/usuariosMongo');
-
+const administador=require('../models/administradorMongo');
 //const productos=require('../models/productos');
 const catalogos = require('../models/productos');
 const nodemailer = require('nodemailer');
-const e = require('express');
+const jwt = require('jsonwebtoken');
 //const vendedor = require("../models/vendedorMongo");
 
 
@@ -13,10 +13,42 @@ const e = require('express');
 
 
 //perfil
-exports.perfil=  (req , res)=>{
+exports.perfil= async (req , res)=>{
 
-  const id = req.params.id;
-  console.log(id);
+  const claveSecreta = process.env.CLAVE_SECRETA;
+  const token = req.query.token;
+  const datosUsuario = JSON.parse(req.query.datos || '{}');
+  // Verifica el token JWT para autenticar al usuario
+  try {
+    const decoded = jwt.verify(token, claveSecreta);
+    
+    // Aquí puedes realizar cualquier lógica adicional basada en el token decodificado
+    
+    res.render('perfil', { usuario: datosUsuario });
+  } catch (error) {
+    res.status(401).send('Token inválido');
+  }
+
+  /*const token = req.query.token;
+  const datosUsuario = JSON.parse(req.query.datos || '{}');
+  try {
+    const decoded = jwt.verify(token,claveSecreta);
+    const idUsuario = decoded.id;
+
+    // Obtén los datos del usuario desde la base de datos utilizando el modelo Usuario
+    const usuario1 = await usuario.findOne({ _id: idUsuario });
+
+    if (!usuario1) {
+      return res.status(401).send('Usuario no encontrado');
+    }
+
+    res.redirect('perfil', { usuario: datosUsuario });
+  } catch (error) {
+    res.status(401).send('Token inválido');
+  }*/
+
+  /*const id = req.params.id;
+  console.log(id);*/
 
 
   /*try {
@@ -61,7 +93,7 @@ exports.perfil=  (req , res)=>{
     ciudad: req.body.ciudad,
     terminos: req.body.terminos, */
 
-  res.render('perfil',{_id:id} );
+  //res.render('perfil',{_id:id} );
 };
 
 //pagina principal
@@ -77,7 +109,62 @@ exports.ingresar=(req , res)=>{
 }
 
 //validar inicio de sesion
-exports.validacionesn=[
+
+exports.validacionesn = [
+  body('_id')
+    .isLength({ min: 1 })
+    .withMessage('cedula inválido'),
+  body('contraseña')
+    .isLength({ min: 5 })
+    .withMessage('contraseña inválida'),
+
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      console.log(req.body);
+      const valores = req.body;
+      const validaciones = errors.array();
+      return res.render('ingresar', { validaciones: validaciones, valores: valores });
+    }
+    const claveSecreta = process.env.CLAVE_SECRETA;
+    const id = req.body._id;
+    const contraseña = req.body.contraseña;
+
+    const usuarioingresa = await usuario.findOne({ _id: id });
+    
+
+    if (!usuarioingresa) {
+      return res.status(401).send('Nombre de usuario inválido');
+    }
+
+    const rolUsuario = usuarioingresa.rol;
+    const contraseñaUsuario = usuarioingresa.contraseña;
+
+    if (contraseñaUsuario !== contraseña) {
+      return res.status(401).send('Contraseña incorrecta');
+    }
+    const datosUsuario = {
+      id: usuarioingresa._id,
+      nombre: usuarioingresa.nombre,
+      apellido: usuarioingresa.apellido,
+      correo: usuarioingresa.correo,
+      direccion: usuarioingresa.direccion,
+      ciudad: usuarioingresa.ciudad,
+
+
+      
+    };
+
+    const token = jwt.sign({ id: usuarioingresa._id, role: rolUsuario }, claveSecreta);
+    res.redirect(`/api/perfil/${id}?token=${token}&datos=${JSON.stringify(datosUsuario)}`);
+    console.log(usuarioingresa);
+    console.log(token);
+  }
+];
+
+//ingres funciona la validacion
+/*exports.validacionesn=[
   body('_id') 
   .isLength({min:1})
   .withMessage('_id invalido')
@@ -111,7 +198,8 @@ console.log(usuarioingresa);
     }
     
   }
-]
+]*/
+
 
 //ingresar
 
@@ -178,43 +266,6 @@ exports.registrarV=(req,res)=>{
 exports.registrarV1=(req,res)=>{
 
 }
-
-
-
-
-
-
-
-//eliminar
-
-
-
-/*exports.borrar =  async(req, res) => {
-    
-    await mascota.findByIdAndDelete(id = req.params.id);
-    
-    res.redirect("/api/v1/mascotas")
-} 
-//update
-
-
-
-    exports.Update = async (req, res) => {
-        
-        const n = await mascota.findByIdAndUpdate(
-          id = req.params.id,
-          {
-            nombre: req.body.mNombre,
-            edad: req.body.mRaza,
-            raza: req.body.mEdad
-          }
-        );
-        console.log(req.params)
-        console.log(n);
-        res.redirect("/api/v1/mascotas");
-      };*/
-
-
       //carro de compras
 
       exports.carro=async(req , res)=>{

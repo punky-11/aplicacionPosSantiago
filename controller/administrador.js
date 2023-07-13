@@ -1,4 +1,4 @@
-//const productos=require('../models/productoMongo');
+const adminstrador=require('../models/administradorMongo');
 const vendedor=require('../models/vendedorMongo');
 const productosInventario =require('../models/productos');
 const xl = require('excel4node');
@@ -7,17 +7,60 @@ const fs = require('fs');
 
 
 exports.perfilAdmin=(req , res)=>{
-    res.render('administrador');
+    res.render('perfilAdmin');
 }
+//registra admin
+exports.registrarAdmin=(req,res)=>{
+    const adminstrador1 = new adminstrador ({ 
+        _id:req.body.idAdmin,
+        nombre:req.body.nombreAdmin,
+        apellido:req.body.apellidoAdmin,
+        contraseña:req.body.ContraceñaAdmin,
+        correo:req.body.correoAdmin
+    
+      });
+    
+      adminstrador1.save();
+          
+          res.redirect('verAdmin');
+}
+//ver administradores
+exports.verVendedores= async (req,res)=>{
+    const vende = await adminstrador.find();
+    res.render('registrarAdmin',{
+        "adminstrador": vende
+    })
+}
+//eliminar admin
+exports.eliminarAdmin= async(req,res)=>{
+    
+    await adminstrador.findByIdAndDelete(id = req.params.id);
+    res.redirect('/admin/verAdmin');
 
+}
+//actualizar admin
+exports.editarAdmin= async(req,res)=>{
+    const n = await adminstrador.findByIdAndUpdate(
+        id = req.params.id,
+        {
+          correo: req.body.cAdmin,
+          nombre: req.body.nAdmin,
+          apellido: req.body.aAdmin,
+          contraseña: req.body.contraseñaA
+        }
+      );
+
+      res.redirect("/admin/verAdmin");
+}
 //tablas
 
 exports.tablaA= async(req,res)=>{
     const producto =await vendedor.find();
-    res.render('tablaAdmin',{
+    res.render('vendedorTabla',{
       "productos": producto
     });
   }
+  
 
 //registrar vendedor
 
@@ -33,7 +76,7 @@ exports.registrarVendedor=(req,res)=>{
 });
 
 vendedor1.save();
-    console.log(vendedor1);
+    
     res.redirect('/admin/tabla');
 }
 //crud vendedores
@@ -48,8 +91,7 @@ exports.editar= async(req,res)=>{
           contraseña: req.body.contraseña
         }
       );
-      console.log(req.params)
-      console.log(n);
+
       res.redirect("/admin/tabla");
 }
 
@@ -75,19 +117,20 @@ exports.verProductos= async (req,res)=>{
 exports.registrarProducto=(req,res)=>{
 
     const agrgarProductos = new productosInventario ({
-        _id:req.body.referencia,
-        nombreProducto:req.body.nompreProcuto,
+        
+        referencia:req.body.referencia,
+        nombre:req.body.nompreProcuto,
         descripcion:req.body.descripcion,
+        stock:req.body.stock,
         precio:req.body.precio,
-        stok:req.body.stock,
-        //img:req.body.
+        //img:req.body,
         habilitado:req.body.activo
 
     });
 
     agrgarProductos.save();
-    console.log(agrgarProductos);
-    res.render('/api/productos');
+    
+    res.redirect('/admin/productos');
 }
 //crud productos
 
@@ -105,12 +148,15 @@ exports.actualizarProducto= async(req,res)=>{
 
         }
     );
-    console.log(req.params)
-    console.log("su id es: "+n);
+
     res.redirect('/admin/productos');
 }
 // eliminar productos
-
+exports.eliminarPorducto=async(req,res)=>{
+    await productosInventario.findByIdAndDelete(id = req.params.id);
+    
+    res.redirect("/admin/productos")
+}
 
 //descargar excel con los datos de los vendedores
 
@@ -202,9 +248,9 @@ exports.graficaProductos= async(req , res)=>{
     //map() crea una nueva matriz con los resultados de llamar a una función para cada elemento de la matriz
 
    const nombres = (await productosInventario.find({},{nombre:1,_id:0})).map(item => item.nombre);
-    console.table(nombres);
+    
    const stocks = (await productosInventario.find({},{stock:1,_id:0})).map(item => item.stock);
-    console.table(stocks);
+    
 
     
 

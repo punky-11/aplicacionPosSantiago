@@ -1,55 +1,44 @@
 const { default: mongoose } = require('mongoose')
 
-const nuevoUuario = require('../config/conectionMongoose')
+const nuevoUuario = require('../config/conectionMongoose');
+
  
 
 const SchemaAdministrador = new mongoose.Schema({
-    //di
     _id:{
-    type: Object,
-    //required:true,
-    
+        type:Number,
+        
     },
 
-    nombreProducto:{
-        default:"sin nombre",
+    nombre:{
+        
         type:String,
         //required:true,
        
     },   
-    descripcion:{
+    apellido:{
         type:String,
-        default:"nn",
+        
         //required:true,
 
     },
 
-    precio:{
-        default:"nn",
-        type:Number,
+    contraseña:{
+        
+        type:String,
         //required:false,
     },
-    stok:{
-        default:"nn",
-        type:Number,
+    correo:{
+        
+        type:String,
         //required:true,
         
-    },
-    img:{
-        default:"nn",
-        type:String,
-        //required:false,
-    },
-    habilitado:{
-        default:"nn",
-        type:Boolean,
-        //required:false,
-    },
+    }
 
 
  });
 
 
-const administrador = mongoose.model('catalogo', SchemaAdministrador);
+const administrador = mongoose.model('administrador', SchemaAdministrador);
 
 module.exports=administrador;

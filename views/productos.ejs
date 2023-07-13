@@ -24,11 +24,11 @@
                             <div class="card-body">
                                 <h3 class="h3"><%= productos.nombre%></h3>
                                 <p class="card-text"><%= productos.descripcion%></p>
-
-                                <p class="card-text"> <strong> <%= productos.precio%> </strong></p>
+                                    <p><span>Cantidad: <%= productos.stock%></span></p>
+                                <p class="card-text"> <strong> <%= productos.precio%> </strong> </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button class="btn btn-dark" onclick="agregarCarro(`<%=productos.nombre%>`,`<%=productos.precio%>`,`<%=productos.id%>`)" >Agregar al carro</button>
+                                        <button class="btn btn-dark" onclick="agregarCarro(`<%=productos.nombre%>`,`<%=productos.precio%>`,`<%=productos.id%>`,`<%= productos.stock%>`)" >Agregar al carro</button>
 
                                     </div>
 

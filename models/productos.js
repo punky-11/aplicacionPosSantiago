@@ -4,11 +4,7 @@ const nuevoUuario = require('../config/conectionMongoose')
  
 
 const SchemaProductos = new mongoose.Schema({
-_id:{
-    type: Object,
-   // required:true,
-    
-    },
+
     referencia:{
         type:String,
     },
@@ -25,7 +21,8 @@ _id:{
         type:Number
     },
     habilitado:{
-        type:Boolean
+        type:Boolean,
+        default:"no habilitado"
     }
 
 
